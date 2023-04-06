@@ -1,0 +1,108 @@
+<div class="row">
+    <div class="col-8">
+      <h1>Formulario de <span [ngStyle]="{'color': 'orange'}">inscripción</span></h1>
+
+      <form
+        (ngSubmit)="onSubmit()"
+        [formGroup]="registerForm"
+        autocomplete="off"
+        class="row g-3"
+      >  
+  
+        <div class="col-md-6">
+          <label for="inputFirstName" class="form-label">Nombre</label>
+          <input
+            formControlName="nombre"
+            type="text"
+            [ngClass]="{ 'is-invalid': nombreControlIsInvalid }"
+            class="form-control"
+            id="inputFirstName"
+          >
+          <div class="form-text">Mínimo 3 caracteres.</div>
+          <div
+            *ngIf="nombreControl?.hasError('required') && nombreControlIsInvalid"
+            class="invalid-feedback">
+            Este campo es requerido.
+          </div>
+        </div>
+  
+        <div class="col-md-6">
+          <label for="inputLastName" class="form-label">Apellido</label>
+          <input
+            formControlName="apellido"
+            type="text"
+            [ngClass]="{ 'is-invalid': apellidoControlIsInvalid }"
+            class="form-control"
+            id="inputLastName"
+          >
+          <div class="form-text">Mínimo 3 caracteres.</div>
+          <div
+            *ngIf="apellidoControl?.hasError('required') && apellidoControlIsInvalid"
+            class="invalid-feedback">
+            Este campo es requerido.
+          </div>
+        </div> 
+  
+        <ng-container formGroupName="localizacion">
+          <div class="col-12">
+            <label for="inputAddress" class="form-label">Dirección</label>
+            <input
+              formControlName="direccion"
+              type="text"
+              class="form-control"
+              id="inputAddress"
+              placeholder="1234 Main St"
+            >
+          </div>  
+
+          
+  
+          <div class="col-md-2">
+            <label for="inputWeight" class="form-label">Peso</label>
+            <input type="text" class="form-control" id="inputWeight">
+          </div>
+
+          <div class="col-md-2">
+            <label for="inputHeight" class="form-label">Altura</label>
+            <input type="text" class="form-control" id="inputHeight">
+          </div>
+  
+  
+          <div class="col-md-4">
+            <label for="inputObjective" class="form-label">Objetivo</label>
+            <select
+              id="inputObjective"
+              class="form-select"
+              formControlName="objetivo"
+              >
+              <option value="" selected>Seleccione</option>
+              <option value="hipertrofia">Hipertrofia</option>
+              <option  value="resistencia">Resistencia</option>
+              <option  value="salud">Salud</option>
+            </select>
+          </div>
+  
+        </ng-container>
+  
+        <div class="col-12 pt-5">
+          <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-4">
+      <h2>JSON</h2>
+  
+      <pre>{{ registerForm.value | json }}</pre>
+  
+      <hr>
+  
+      <h2>Errores</h2>
+  
+      <h5>CONTROL NOMBRE</h5>
+      <pre>{{ nombreControl?.errors | json }}</pre>
+
+      <h5>CONTROL APELLIDO</h5>
+      <pre>{{ apellidoControl?.errors | json }}</pre>
+    </div>
+  </div>
+  
